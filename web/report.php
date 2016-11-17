@@ -9,8 +9,11 @@ if(!isset($_SESSION['user'])){
 
 if($_SESSION['user'] !== 'admin'){
   die('WTF? Only admin!');
-} ?>
+}
 
+
+
+?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -31,19 +34,30 @@ if($_SESSION['user'] !== 'admin'){
   <body>
 
     <div class="container">
-      <h2> Welcome, Admin! </h2>
-      <div class="col-md-12">
+      <?php if(isset($error)) {
+        echo "<div class='alert alert-danger' role='alert'>$error</div>";
+      } ?>
+      <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-          <h2> Choose one: </h2>
-          <div class="list-group">
-              <a class="list-group-item" href="upload.php">Upload a file - We do not accept .php files</a>
-              <a class="list-group-item" href="report.php">Report an issue</a>
-              <a class="list-group-item" href="logout.php">Logout</a>
-          </div>
+          <h3>Report an issue</h3>
+          <p> This is a feature to report a problem to our sysadmin! We first check automatically. </p>
+          <h3> Follow the rules: </h3>
+          <ul>
+            <li>We only accept url from http://127.0.0.1 </li>
+          </ul>
         </div>
-
       </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <form action="report.php" method="POST">
+            <input type="text" name="url" id="url">
+            <input type="submit" value="Send" name="submit">
+          </form>
+        </div>
+      </div>
+
     </div>
   </body>
 </html>

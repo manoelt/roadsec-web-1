@@ -8,7 +8,6 @@ if(isset($_SESSION['user'])){
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-  var_dump($_POST);
   if( is_array($_POST['pass']) && (
     isset($_POST['pass']['$ne']) ||
     isset($_POST['pass']['$eq']) ||
@@ -26,7 +25,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $collection = $client->hackaflag->users;
 
   $results = $collection->findOne(array("user" => $_POST['user'], "pass" => $_POST['pass']));
-  var_dump($results);
   if(!is_null($results)){
     $_SESSION['user'] = $results->user;
     header("location: admin.php");
