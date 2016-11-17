@@ -11,6 +11,21 @@ if($_SESSION['user'] !== 'admin'){
   die('WTF? Only admin!');
 }
 
+if(isset($_GET['url'])) {
+  $_url = $_GET['url'];
+  if(stristr($_url, "http://127.0.0.1") === false){
+    die("We only accept url from http://127.0.0.1");
+  }
+
+  $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+
+  $bulk = new MongoDB\Driver\BulkWrite;
+  $bulk->insert(array("url" => $_url, "view" => 0));
+  $manager->executeBulkWrite('hackaflag.urls', $bulk);
+
+  $ok = "URL saved, we are checking.";
+
+}
 
 
 ?>
@@ -36,6 +51,9 @@ if($_SESSION['user'] !== 'admin'){
     <div class="container">
       <?php if(isset($error)) {
         echo "<div class='alert alert-danger' role='alert'>$error</div>";
+      }
+      if(isset($ok)) {
+        echo "<div class='alert alert-success' role='alert'>$ok</div>";
       } ?>
       <div class="row">
         <div class="col-md-3"></div>
@@ -51,7 +69,7 @@ if($_SESSION['user'] !== 'admin'){
       <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-          <form action="report.php" method="POST">
+          <form action="report.php" method="GET">
             <input type="text" name="url" id="url">
             <input type="submit" value="Send" name="submit">
           </form>

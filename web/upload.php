@@ -3,6 +3,7 @@ require '../vendor/autoload.php';
 
 session_start();
 
+/*
 if(!isset($_SESSION['user'])){
   header("location: login.php");
 }
@@ -10,7 +11,7 @@ if(!isset($_SESSION['user'])){
 if($_SESSION['user'] !== 'admin'){
   die('WTF? Only admin!');
 }
-
+*/
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if($_SERVER['REMOTE_ADDR'] !== '127.0.0.1') {
@@ -39,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $extension = @explode('.', $_FILES['file']['name']);
     $extension = @end($extension);
 
-    if($extension === '' || $extension === 'php' || $extension === 'htaccess' || $extension == 'html' || $extension == 'xhtml') {
+    if($extension === '' || $extension === 'php' || $extension === 'php5' || $extension === 'htaccess' || $extension == 'html' || $extension == 'xhtml') {
       $error.= "Improper extension.";
       $ok = 0;
     }
@@ -63,7 +64,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin only</title>
+    <title>Open</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
@@ -84,7 +85,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
           <p> This is a feature to upload files to our server. Be careful! </p>
           <h3> Follow the rules: </h3>
           <ul>
-            <li>.php .html .xhtml .htaccess is not allowed!</li>
+            <li>.php .php5 .html .xhtml .htaccess is not allowed!</li>
             <li>Only from 127.0.0.1 you could upload a file!</li>
             <li>Filename must have more than 10 chars!</li>
             <li>Max size: 700000 bytes</li>

