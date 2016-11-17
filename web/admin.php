@@ -37,7 +37,7 @@ if($_SESSION['user'] !== 'admin'){
         <div class="col-md-6">
           <h2> Choose one: </h2>
           <div class="list-group">
-              <a class="list-group-item" href="upload.php">Upload a file - We do not accept .php files</a>
+              <a class="list-group-item" href="upload.php">Upload a file</a>
               <a class="list-group-item" href="report.php">Report an issue</a>
               <a class="list-group-item" href="logout.php">Logout</a>
           </div>
