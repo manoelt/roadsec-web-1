@@ -19,6 +19,7 @@ WORKDIR /var/www/html
 
 COPY composer.json /var/www/html
 COPY composer.lock /var/www/html
+COPY initdb.js /tmp/
 COPY ./web/ /var/www/html
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -34,6 +35,7 @@ RUN chown -R www-data uploads
 
 RUN composer install --no-progress
 
+RUN mongo hackaflag /tmp/initdb.js
 RUN echo "CTF-BR{mimimi_my_F1rst_CSRF}" > /flag
 
 RUN phantomjs /root/bot.js &&
