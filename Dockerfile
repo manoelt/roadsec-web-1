@@ -9,9 +9,10 @@ RUN apt-get update && apt-get install -y \
     libapache2-mod-php7.0 \
     php7.0-json \
     php7.0-curl \
+    php7.0-dev \
     php-pear \
-    php-dev \
     mongodb-org \
+    libsasl2-dev \
     phantomjs
 
 RUN pecl install mongodb
