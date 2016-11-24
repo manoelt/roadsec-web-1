@@ -1,8 +1,14 @@
-FROM php:7.0-apache
+FROM ubuntu:16.04
 
-RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+RUN echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 RUN apt-get update && apt-get install -y \
-    php-curl \
+    apache2 \
+    php7.0 \
+    php7.0-cli \
+    libapache2-mod-php7.0 \
+    php7.0-json \
+    php7.0-curl \
     php-pear \
     php-dev \
     mongodb-org \
@@ -11,7 +17,9 @@ RUN apt-get update && apt-get install -y \
 RUN pecl install mongodb
 RUN a2dismod status
 RUN a2enmod rewrite
-RUN service mongod start
+
+COPY mongod.service /lib/systemd/system/
+#RUN service mongod start
 
 COPY bot.js /root
 
@@ -24,7 +32,7 @@ COPY ./web/ /var/www/html
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php
-RUN php -r "unlink('composer-setup.php')"
+RUN php -r "unlink('composer-setup.php');"
 RUN mv composer.phar /bin/composer
 
 RUN echo "extension=mongodb.so" >> /etc/php/7.0/cli/php.ini
