@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     mongodb-org \
     libsasl2-dev \
     pkg-config \
+    git \
     phantomjs
 
 RUN pecl install mongodb
