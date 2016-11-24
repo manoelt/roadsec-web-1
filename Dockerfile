@@ -22,7 +22,7 @@ RUN a2dismod status
 RUN a2enmod rewrite
 
 COPY mongod.service /lib/systemd/system/
-#RUN service mongod start
+RUN service mongod start
 
 COPY bot.js /root
 
