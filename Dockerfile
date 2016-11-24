@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y \
     php-pear \
     mongodb-org \
     libsasl2-dev \
+    pkg-config \
     phantomjs
 
 RUN pecl install mongodb
