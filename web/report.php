@@ -17,7 +17,7 @@ if(isset($_GET['url'])) {
     die("We only accept url from http://127.0.0.1");
   }
 
-  $manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+  $manager = new MongoDB\Driver\Manager("mongodb://mongo:27017");
 
   $bulk = new MongoDB\Driver\BulkWrite;
   $bulk->insert(array("url" => $_url, "view" => 0));

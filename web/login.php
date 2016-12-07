@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     die("Not so easy. Attack detected. Blocked \$eq, \$gt, \$lt, \$ne, \$gte, \$in, \$nin, \$regex");
   }
 
-  $client = new MongoDB\Client("mongodb://localhost:27017");
+  $client = new MongoDB\Client("mongodb://mongo:27017");
   $collection = $client->hackaflag->users;
 
   $results = $collection->findOne(array("user" => $_POST['user'], "pass" => $_POST['pass']));

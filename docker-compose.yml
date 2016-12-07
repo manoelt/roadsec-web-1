@@ -1,0 +1,10 @@
+web:
+ build: .
+ ports:
+  - "1337:80"
+ links:
+  - mongo
+
+mongo:
+ image: mongo
+ command: mongod 

@@ -7,7 +7,7 @@ if($_SERVER['REMOTE_ADDR'] !== '127.0.0.1') {
   die('You are not allowed. Only from 127.0.0.1');
 }
 
-$client = new MongoDB\Client("mongodb://localhost:27017");
+$client = new MongoDB\Client("mongodb://mongo:27017");
 
 $collection = $client->hackaflag->urls;
 
@@ -20,7 +20,7 @@ if(isset($_GET['id'])) {
       array("_id" => new MongoDB\BSON\ObjectId($_GET['id'])), array('$set' => array('view' => 1))
     );
 
-    $manager = new MongoDB\Driver\Manager('mongodb://localhost:27017');
+    $manager = new MongoDB\Driver\Manager('mongodb://mongo:27017');
     $writeConcern = new MongoDB\Driver\WriteConcern(MongoDB\Driver\WriteConcern::MAJORITY, 1000);
     $result = $manager->executeBulkWrite('hackaflag.urls', $bulk, $writeConcern);
 

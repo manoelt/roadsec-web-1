@@ -1,5 +1,5 @@
 var page = require('webpage').create(), address;
-address = 'http://localhost/roadsec-web-1/web/urls.php';
+address = 'http://127.0.0.1/urls.php';
 var doTasks = function() {
      console.log('crawling');
      page.open(address, function(status) {
