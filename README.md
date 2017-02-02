@@ -4,7 +4,7 @@ Steps:
 
 Clone this repo and cd
 
-> git clone ...
+> git clone https://github.com/manoelt/roadsec-web-1
 
 > cd roadsec-web-1
 
