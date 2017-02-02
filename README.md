@@ -10,6 +10,8 @@ Clone this repo and cd
 
 Change FLAG value in Dockerfile
 
+Run docker-compose build and up
+
 > $ docker-compose build
 
 > $ docker-compose up web mongo
